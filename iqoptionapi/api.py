@@ -60,6 +60,7 @@ class IQOptionAPI(object):
         self.password = password
         self.proxies = proxies
 
+
     def prepare_http_url(self, resource):
         """Construct http url from resource url.
 
@@ -82,6 +83,8 @@ class IQOptionAPI(object):
 
         :returns: The instance of :class:`Response <requests.Response>`.
         """
+
+
         logger = logging.getLogger(__name__)
         url = self.prepare_http_url(resource)
 
@@ -93,6 +96,8 @@ class IQOptionAPI(object):
                                         params=params,
                                         headers=headers,
                                         proxies=self.proxies)
+
+
         logger.debug(response)
         logger.debug(response.text)
         logger.debug(response.headers)
@@ -119,8 +124,16 @@ class IQOptionAPI(object):
 
         data = json.dumps(dict(name=name,
                                msg=msg))
+
         logger.debug(data)
         self.websocket.send(data)
+        #result = self.websocket.recv()
+        #print(result)
+
+
+
+
+
 
     @property
     def login(self):
@@ -276,6 +289,7 @@ class IQOptionAPI(object):
         """Method for connection to IQ Option API."""
         response = self.login(self.username, self.password) # pylint: disable=not-callable
         ssid = response.cookies["ssid"]
+
         self.set_session_cookies()
         self.websocket_client = WebsocketClient(self)
 

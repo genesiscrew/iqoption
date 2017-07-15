@@ -19,11 +19,12 @@ class WebsocketClient(object):
             on_error=self.on_error, on_close=self.on_close,
             on_open=self.on_open)
 
+
     def on_message(self, wss, message): # pylint: disable=unused-argument
         """Method to process websocket messages."""
         logger = logging.getLogger(__name__)
         logger.debug(message)
-
+        print(message)
         message = json.loads(str(message))
 
         if message["name"] == "timeSync":

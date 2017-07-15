@@ -66,4 +66,5 @@ class TimeSync(Base):
 
         :returns: The expiration timestamp.
         """
-        return time.mktime(self.expiration_datetime.timetuple())
+        #return time.mktime(self.expiration_datetime.timetuple())
+        return time.mktime(self.expiration_datetime.replace(second=0, microsecond=0).timetuple())
